@@ -91,6 +91,18 @@ A modern, real-time speech recognition application built with OpenAI's Whisper a
   - Microsoft Word (.docx)
   - Timestamps support
 
+### 3. Batch Transcription (`batch_transcribe.py`)
+
+- Transcribe all .mp3 files in a folder recursively using Whisper
+- Supports multiple output formats:
+  - JSON with timestamped segments
+  - Plain text (.txt) with timestamps
+  - Markdown table (.md) with timestamps
+  - Microsoft Word (.docx) with table format (requires python-docx)
+- Automatic language detection
+- Word-level timestamps
+- Mirrors input folder structure in output directory
+
 ## Requirements
 
 - Python 3.11+
@@ -155,6 +167,41 @@ python whisper_gui.py
 4. Click "Start Recording" to begin transcription
 5. Speak into your microphone
 6. Watch the beautiful waveform animation and real-time transcription
+
+### Batch Transcription
+
+1. Activate the virtual environment if not already activated:
+
+```bash
+source venv/bin/activate  # On macOS/Linux
+```
+
+2. Run the batch transcription script:
+
+```bash
+python3 batch_transcribe.py <path-to-folder-with-mp3-files> --output <output-folder> --model <model-name>
+```
+
+Example:
+
+```bash
+python3 batch_transcribe.py /path/to/audio/folder --output transcripts --model medium
+```
+
+This will transcribe all .mp3 files in the specified folder (recursively) and save the outputs in the specified output folder, mirroring the input folder structure.
+
+**Parameters:**
+
+- `input_root`: Path to the folder containing .mp3 files (required)
+- `--output`: Output folder for transcripts (default: `transcripts`)
+- `--model`: Whisper model to use (default: `medium`, options: tiny, base, small, medium, large)
+
+**Output formats:**
+
+- `.json`: JSON file with timestamped segments
+- `.txt`: Plain text with timestamps
+- `.md`: Markdown table with timestamps
+- `.docx`: Microsoft Word document with table (if python-docx is installed)
 
 ### Model Selection
 
